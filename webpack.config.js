@@ -8,7 +8,7 @@ module.exports = {
     'react-hot-loader/patch',
     'webpack/hot/dev-server',
     'webpack-hot-middleware/client',
-    path.resolve(__dirname, 'src/index')
+    path.resolve(__dirname, 'src/index.jsx')
   ],
   output: {
     path: path.join(__dirname, 'dist'),
@@ -37,13 +37,13 @@ module.exports = {
   module: {
     preLoaders: [
       {
-        test: /\.js$/,
+        test: /\.jsx?$/,
         exclude: /node_modules/,
         loader: 'eslint'
       }
     ],
     loaders: [{
-      test: /\.js$/,
+      test: /\.jsx?$/,
       loader: 'babel',
       include: path.join(__dirname, 'src')
     },
@@ -52,5 +52,8 @@ module.exports = {
       loader: 'style!css!sass?modules&localIdentName=[name]---[local]---[hash:base64:5]'
     },
     ]
+  },
+  resolve: {
+    extensions: ['', '.js', '.jsx'],
   }
 };

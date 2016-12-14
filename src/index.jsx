@@ -20,7 +20,7 @@ ReactDOM.render(
 
 if (module.hot) {
   module.hot.accept('./containers/Root', () => {
-    const NextRoot = require('./containers/Root').default;
+    const NextRoot = require('./containers/Root').default; // eslint-disable-line global-require
     ReactDOM.render(
       <AppContainer>
         <NextRoot store={store} history={history} />

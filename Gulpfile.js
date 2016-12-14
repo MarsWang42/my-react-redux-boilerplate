@@ -16,12 +16,12 @@ var path = {
   MINIFIED_OUT: 'build.min.js',
   DEST_SRC: 'dist/src',
   DEST_BUILD: 'dist/build',
-  DEST: 'dist'
+  DEST: 'dist',
 };
 
 // Task to remove previous compilations
 gulp.task('clean-dist', function () {
-  return gulp.src('dist', {read: false})
+  return gulp.src('dist', { read: false })
     .pipe(clean());
 });
 
@@ -56,17 +56,17 @@ gulp.task('dev', function() {
             // It suppress everything except error, so it has to be set to false as well
             // to see success build.
             noInfo: false,
-            assets: false,
+            assets: true,
             version: false,
             hash: false,
             timings: false,
             // These two can make the build much quieter.
             chunks: false,
-            chunkModules: false
-          }
+            chunkModules: false,
+          },
         }),
-        webpackHotMiddleware(bundler)
-      ]
-    }
+        webpackHotMiddleware(bundler),
+      ],
+    },
   });
-})
+});

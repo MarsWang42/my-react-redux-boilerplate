@@ -1,5 +1,8 @@
+const rootProd = require('./Root.prod.jsx');
+const rootDev = require('./Root.dev.jsx');
+
 if (process.env.NODE_ENV === 'PROD') {
-    module.exports = require('./Root.prod');
+  module.exports = rootProd;
 } else {
-    module.exports = require('./Root.dev');
+  module.exports = rootDev;
 }

@@ -39,11 +39,24 @@ module.exports = {
       'process.env.NODE_ENV': JSON.stringify('PROD')
     }),
     new webpack.NoErrorsPlugin()
-],
+  ],
+
+  eslint: {
+    configFile: '.eslintrc',
+    failOnWarning: false,
+    failOnError: false
+  },
 
   module: {
+    preLoaders: [
+      {
+        test: /\.jsx?$/,
+        exclude: /node_modules/,
+        loader: 'eslint'
+      }
+    ],
     loaders: [{
-      test: /\.js$/,
+      test: /\.jsx?$/,
       loader: 'babel',
       include: path.join(__dirname, 'src')
     },
@@ -56,5 +69,8 @@ module.exports = {
   },
   postcss: [
     require('autoprefixer')
-  ]
+  ],
+  resolve: {
+    extensions: ['', '.js', '.jsx'],
+  }
 };
