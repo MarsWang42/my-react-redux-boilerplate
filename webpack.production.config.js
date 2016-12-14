@@ -1,6 +1,7 @@
 var path = require('path');
 var webpack = require('webpack');
 var htmlWebpackPlugin = require('html-webpack-plugin');
+var ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = {
   devtool: 'eval',
@@ -23,6 +24,8 @@ module.exports = {
       filename: 'index.html'
     }),
     new webpack.HotModuleReplacementPlugin(),
+    // extract the style files from js to seperate css files
+    new ExtractTextPlugin('[name]-[hash].min.css'),
     // handles uglifying js
     new webpack.optimize.UglifyJsPlugin({
       compressor: {
@@ -34,18 +37,24 @@ module.exports = {
     // to behavior as production build
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify('PROD')
-    })
+    }),
+    new webpack.NoErrorsPlugin()
 ],
 
   module: {
     loaders: [{
       test: /\.js$/,
       loader: 'babel',
-      query: {
-        "presets": ["es2015", "stage-0", "react"],
-        "plugins": ["react-hot-loader/babel"]
-      },
       include: path.join(__dirname, 'src')
+    },
+    {
+      test: /\.scss$/,
+      // we extract the styles into their own .css file instead of having
+      // them inside the js.
+      loader: ExtractTextPlugin.extract('style', 'css!postcss!sass')
     }]
-  }
+  },
+  postcss: [
+    require('autoprefixer')
+  ]
 };

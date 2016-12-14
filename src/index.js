@@ -5,6 +5,7 @@ import { syncHistoryWithStore } from 'react-router-redux';
 import { AppContainer } from 'react-hot-loader';
 import configureStore from './store/configureStore';
 import Root from './containers/Root';
+import './styles/main.scss';
 
 const rootElement = document.getElementById('root');
 const store = configureStore();
@@ -14,7 +15,7 @@ ReactDOM.render(
   <AppContainer>
     <Root store={store} history={history} />
   </AppContainer>,
-  rootElement
+  rootElement,
 );
 
 if (module.hot) {
@@ -22,9 +23,9 @@ if (module.hot) {
     const NextRoot = require('./containers/Root').default;
     ReactDOM.render(
       <AppContainer>
-         <NextRoot store={store} history={history}/>
+        <NextRoot store={store} history={history} />
       </AppContainer>,
-      rootElement
+      rootElement,
     );
   });
 }
