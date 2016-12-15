@@ -1,5 +1,7 @@
-dist
+./dist
 node_modules
 coverage
+test/
 webpack.*.js
 *server.js
+Gulpfile.js

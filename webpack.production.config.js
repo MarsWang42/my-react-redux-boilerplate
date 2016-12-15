@@ -44,7 +44,7 @@ module.exports = {
   eslint: {
     configFile: '.eslintrc',
     failOnWarning: false,
-    failOnError: false
+    failOnError: true,
   },
 
   module: {
@@ -65,7 +65,16 @@ module.exports = {
       // we extract the styles into their own .css file instead of having
       // them inside the js.
       loader: ExtractTextPlugin.extract('style', 'css!postcss!sass')
-    }]
+    },
+    {
+      test: /\.woff(2)?(\?[a-z0-9#=&.]+)?$/,
+      loader: 'url?limit=10000&mimetype=application/font-woff'
+    },
+    {
+      test: /\.(ttf|eot|svg)(\?[a-z0-9#=&.]+)?$/,
+      loader: 'file'
+    },
+    ]
   },
   postcss: [
     require('autoprefixer')
